@@ -12,7 +12,7 @@ void print_list(Node *node) {								//Printting function list
 		if (node->sign == '/' && node->two == 0)
 			abort_("\nError - deviision by zero!");				//Call error func with message
 
-	if((node->sign == '+' || node->sign == '-') && node->flag_type[0] == 1)		//Case of odd or subtraction left 0
+	if(node->sign == '+' && node->flag_type[0] == 1)		//Case of odd or subtraction left 0
 		if(node->one == 0) {
 			if(node->flag_type[1] == 1)
 				printf(" %d", node->two);
