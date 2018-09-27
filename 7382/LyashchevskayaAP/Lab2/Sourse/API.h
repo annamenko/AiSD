@@ -1,5 +1,5 @@
 typedef struct Node {                                                   //Struct node of list
-        int flag_type[2];                                               //Array keeps type of ergs
+        int flag_type[2];                                               //Array keeps type of args: 1 - int, 2 - struct Node *
         char sign;                                                      //Arg-sign
         union {                                                         //First arg
                 int one;                                                //May be digit
