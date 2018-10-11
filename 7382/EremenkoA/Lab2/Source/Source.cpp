@@ -6,15 +6,15 @@
 //#include <conio.h>
 using namespace std;
 
-namespace h_list {					//создание структуры иерархического списка
+namespace h_list {					//СЃРѕР·РґР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РёРµСЂР°СЂС…РёС‡РµСЃРєРѕРіРѕ СЃРїРёСЃРєР°
 	struct s_expr;
 	struct  two_ptr {
-		s_expr *head;					//указатель на начало списка	 
-		s_expr *tail;					//указатель на конец списка
+		s_expr *head;					//СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РЅР°С‡Р°Р»Рѕ СЃРїРёСЃРєР°	 
+		s_expr *tail;					//СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РєРѕРЅРµС† СЃРїРёСЃРєР°
 	};
 
 	struct s_expr {						
-		bool test;					// если true: atom, иначе false: pair
+		bool test;					// РµСЃР»Рё true: atom, РёРЅР°С‡Рµ false: pair
 		struct {
 			char atom;
 			two_ptr pair;
@@ -110,11 +110,11 @@ namespace h_list {
 		else { cout << "Atom\n"; getch(); exit(1); }
 		else { cout << "The list is empty\n"; getch(); exit(1); }
 	}
-	bool isAtom(const lisp s) {						//функция проверяет атомарен ли спискок 
+	bool isAtom(const lisp s) {						//С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚ Р°С‚РѕРјР°СЂРµРЅ Р»Рё СЃРїРёСЃРєРѕРє 
 		if (s == NULL) return false;
 		else return (s->test);
 	}
-	bool isNull(const lisp s) {					//функция проверяет список на пустоту
+	bool isNull(const lisp s) {					//С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚ СЃРїРёСЃРѕРє РЅР° РїСѓСЃС‚РѕС‚Сѓ
 		return s == NULL;
 	}
 
@@ -149,7 +149,7 @@ namespace h_list {
 		return s;
 	}
 
-	void destroy(lisp s) {					//функция освобождения памяти 
+	void destroy(lisp s) {					//С„СѓРЅРєС†РёСЏ РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РїР°РјСЏС‚Рё 
 		if (s != NULL) {
 			if (!isAtom(s)) {
 				destroy(head(s));
@@ -159,24 +159,24 @@ namespace h_list {
 		};
 	}
 
-	char getAtom(const lisp s) {					//функция дает возможность получить значение атомарного выражения
+	char getAtom(const lisp s) {					//С„СѓРЅРєС†РёСЏ РґР°РµС‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ Р°С‚РѕРјР°СЂРЅРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
 		if (!isAtom(s)) { cout << " Error - it's not an atom \n"; getch();  exit(1); }
 		else return (s->node.atom);
 	}
 
-	void read_lisp(lisp& y) {					//функция считывания списка
+	void read_lisp(lisp& y) {					//С„СѓРЅРєС†РёСЏ СЃС‡РёС‚С‹РІР°РЅРёСЏ СЃРїРёСЃРєР°
 		char x;
 		do cin >> x; while (x == ' ');
 		read_s_expr(x, y);
 	}
 
-	void read_s_expr(char prev, lisp& y) {						//вспомогательная процедура для read_lisp
+	void read_s_expr(char prev, lisp& y) {						//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РґР»СЏ read_lisp
 		if (prev == ')') { cout << " Incorrect using a closing bracket\n" << endl; getch(); exit(1); }
 		else if (prev != '(') y = make_atom(prev);
 		else read_seq(y);
 	}
 
-	void read_seq(lisp& y) {					//вспомогательная процедура для read_lisp
+	void read_seq(lisp& y) {					//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РґР»СЏ read_lisp
 		char x;
 		lisp p1, p2;
 		if (!(cin >> x)) { cout << "Error\n" << endl; getch(); exit(1); }
@@ -191,7 +191,7 @@ namespace h_list {
 		}
 	}
 
-	void write_lisp(const lisp x) {					//функция вывода списка с внешними скобками
+	void write_lisp(const lisp x) {					//С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° СЃРїРёСЃРєР° СЃ РІРЅРµС€РЅРёРјРё СЃРєРѕР±РєР°РјРё
 		if (isNull(x)) cout << "()";
 		else if (isAtom(x)) cout << ' ' << x->node.atom;
 		else {
@@ -201,7 +201,7 @@ namespace h_list {
 		}
 	}
 
-	void write_seq(const lisp x) {					//функция вывода последовательности элементов списка без скобок
+	void write_seq(const lisp x) {					//С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё СЌР»РµРјРµРЅС‚РѕРІ СЃРїРёСЃРєР° Р±РµР· СЃРєРѕР±РѕРє
 		if (!isNull(x)) {
 			write_lisp(head(x));
 			write_seq(tail(x));
