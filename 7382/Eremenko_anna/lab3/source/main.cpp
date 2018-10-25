@@ -4,8 +4,8 @@
 #include <cstdio>
 #include <fstream>
 #include <string>
-using namespace std;
-
+#include "copy.cpp"
+/*using namespace std;
 class Expression {
 public:
 	string current_input;
@@ -76,21 +76,20 @@ public:
 
 	int front();
 };
-
-
+*/
 int main() {
 	string input;
 		cout << "Enter the expression:" << endl;
 		getline(cin, input);
 		if (input == "") { cout << "input cant be empty!!!";exit(0); }
-		int pad=0;
+		int pad=0,flag=0;
 		for(int i=0;i<input.size();i++)
 		{
 		if(pad<0){cout<<"wrong input\n";exit(1);}
-		if(input[i]=='(')pad++;
-		if(input[i]==')')pad--;
+		if(input[i]=='('){pad++;flag=1;}
+		if(input[i]==')'){pad--;flag=1;}
 		}
-		if(pad!=0){cout<<"wrong input\n";exit(1);}
+		if(pad!=0||flag==0){cout<<"wrong input\n";exit(1);}
 		cout <<"input:"<< input << endl;
 	stringstream stream;
 	for (int i = 0;i<input.length() ; i++) {//delete all ' '
@@ -230,4 +229,5 @@ Element* ListBrackets::findElement(int a) {
 	}
 	return curr;
 }
+
 
