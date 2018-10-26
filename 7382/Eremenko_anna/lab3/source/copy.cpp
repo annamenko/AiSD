@@ -8,23 +8,17 @@ public:
 class Element {
 public:
 	Element* next = nullptr;
-
 	explicit Element(int number) {
 		this->number = number;
 	}
-
 	Element(int a, int b) {
 		brackets = new int[2];
 		this->brackets[0] = a;
 		this->brackets[1] = b;
 	}
-
 	int getNumber();
-
 	int getOpening();
-
 	int getClosing();
-
 private:
 	union {
 		int number;
@@ -35,39 +29,117 @@ private:
 class ListBrackets {
 private:
 	Element* head = nullptr;
-
 public:
 	void add(int a, int b);
-
 	Element* findElement(int a);
-
 	Element* lastElement();
 };
 
 class Stack {
-
 private:
 	Element* head = nullptr;
 public:
 	void pop();
-
 	void push(int num);
-
 	int top();
-
 };
 
 class List {
-
 private:
 	Element* head = nullptr;
 public:
 	void pop();
-
 	void push(int num);
-
 	Element* back();
-
 	int front();
 };
+/*
 
+void Stack::pop() {
+    auto* curr = head;
+    head = head->next;
+    delete curr;
+}
+
+void Stack::push(int num) {
+    if (head == nullptr) {
+        head = new Element(num);
+    }
+    else {
+        auto* curr = new Element(num);//push in stack.this head is pointer of last element but first in stack
+        curr->next = head;
+        head = curr;
+    }
+}
+
+int Stack::top() {
+    return head->getNumber();
+}
+
+void List::push(int num) {
+    if (head == nullptr) {
+        head = new Element(num);
+    }
+    else {
+        this->back()->next = new Element(num);
+    }
+}
+
+Element* List::back() {
+    if (head == nullptr) {
+        return nullptr;
+    }
+    Element* curr = head;//find last element for list
+    while (curr->next != nullptr) {
+        curr = curr->next;
+    }
+    return curr;
+}
+
+int List::front() {
+    return head->getNumber();
+}
+
+void List::pop() {
+    auto* curr = head;
+    head = head->next;
+    delete curr;
+}
+
+int Element::getNumber() {
+    return this->number;
+}
+
+int Element::getOpening() {
+    return this->brackets[0];
+}
+
+int Element::getClosing() {
+    return this->brackets[1];
+}
+
+Element* ListBrackets::lastElement() {// go to last element
+    Element* curr = head;
+    while (curr->next != nullptr) {
+        curr = curr->next;
+    }
+    return curr;
+
+}
+
+void ListBrackets::add(int a, int b) {
+    if (head == nullptr) {
+        head = new Element(a, b);//create head
+    }
+    else {
+        this->lastElement()->next = new Element(a, b);//add element in tail
+    }
+}
+
+Element* ListBrackets::findElement(int a) {
+    Element* curr = head;
+    while (curr->getOpening() != a && curr != nullptr) {//find element where symbol==a or not find(curr==nullptr)
+        curr = curr->next;
+    }
+    return curr;
+}*/
